@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/side_nav_bar"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingTop="40dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+
+            android:id="@+id/txtMarketUSD"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:text="DOLAR : "
+            android:textColor="@color/textColorPri"
+            android:textSize="15dp" />
+
+        <TextView
+
+            android:id="@+id/txtMarketUSDValue"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/textColorPri"
+            android:textSize="15dp" />
+
+        <ImageView
+
+            android:id="@+id/imgMarketUSDStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:src="@drawable/ic_up_2e7d32" />
+
+        <TextView
+
+            android:id="@+id/txtMarketUSDPercantage"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/colorAccent"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+
+            android:id="@+id/txtMarketEURO"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="EURO : "
+            android:textColor="@color/textColorPri"
+            android:textSize="15dp" />
+
+        <TextView
+
+            android:id="@+id/txtMarketEUROValue"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textColor="@color/textColorPri"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/imgMarketEUROStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:src="@drawable/ic_up_2e7d32" />
+
+        <TextView
+
+            android:id="@+id/txtMarketEUROPercantage"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/colorAccent"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+
+            android:id="@+id/txtMarketGOLD"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="ALTIN : "
+            android:textColor="@color/textColorPri"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txtMarketGOLDValue"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textColor="@color/textColorPri"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/imgMarketGOLDStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:src="@drawable/ic_up_2e7d32" />
+
+        <TextView
+
+            android:id="@+id/txtMarketGOLDPercantage"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/colorAccent"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+
+            android:id="@+id/txtMarketBRENT"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="PETROL : "
+            android:textColor="@color/textColorPri"
+            android:textSize="15dp" />
+
+        <TextView
+
+            android:id="@+id/txtMarketBRENTValue"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textColor="@color/textColorPri"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/imgMarketBRENTStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:src="@drawable/ic_up_2e7d32" />
+
+        <TextView
+
+            android:id="@+id/txtMarketBRENTPercantage"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/colorAccent"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/txtMarketBIST"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="BIST 100 : "
+            android:textColor="@color/textColorPri"
+            android:textSize="15dp" />
+
+        <TextView
+
+            android:id="@+id/txtMarketBISTValue"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textColor="@color/textColorPri"
+            android:textSize="15dp" />
+
+        <ImageView
+
+            android:id="@+id/imgMarketBISTStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:src="@drawable/ic_up_2e7d32" />
+
+        <TextView
+
+            android:id="@+id/txtMarketBISTPercentage"
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+</LinearLayout>
