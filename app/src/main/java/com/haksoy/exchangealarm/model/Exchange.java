@@ -1,10 +1,14 @@
 package com.haksoy.exchangealarm.model;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by haksoy on 28.03.2017.
  */
 
-public class Exchange {
+public class Exchange implements Serializable {
     private int id;
     private String name;
     private float price;

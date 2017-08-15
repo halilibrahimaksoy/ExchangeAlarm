@@ -2,14 +2,13 @@ package com.haksoy.exchangealarm.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.haksoy.exchangealarm.R;
-import com.haksoy.exchangealarm.adapter.GenericAdapter;
 import com.haksoy.exchangealarm.adapter.NavigationDrawerAdapter;
 import com.haksoy.exchangealarm.application.ThisApplication;
 import com.haksoy.exchangealarm.base.GenericPresenter;
@@ -49,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements ServiceViewInterf
     @Inject
     AppService mAppService;
 
-    @BindView(R.id.rclMainList)
-    RecyclerView mainList;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.nav_view)
@@ -62,13 +58,13 @@ public class MainActivity extends AppCompatActivity implements ServiceViewInterf
     @BindView(R.id.navHeader)
     View navHeader;
     HeaderHolder headerHolder;
+    GeneralExchangeListFragment exchangeListFragment;
 
     ActionBarDrawerToggle toggle;
-    private GenericAdapter mAdapter;
-    private List<Object> objectList;
     private List<NavigationDrawerAdapter.Item> navigationList;
     private List<String> category;
     private GenericPresenter<Object> mGenericPresenter;
+    private String selectedCategory;
 
 
     @Override
@@ -81,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements ServiceViewInterf
 
         generateCategory();
         registerDrawer();
-        configureViews();
         registerHeader();
         mGenericPresenter = new GenericPresenter<>(MainActivity.this);
     }
@@ -99,14 +94,6 @@ public class MainActivity extends AppCompatActivity implements ServiceViewInterf
 
     }
 
-    private void configureViews() {
-        mainList.setRecycledViewPool(new RecyclerView.RecycledViewPool());
-        mainList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mainList.setHasFixedSize(false);
-        mainList.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new GenericAdapter(getLayoutInflater());
-        mainList.setAdapter(mAdapter);
-    }
 
     private void registerDrawer() {
         setTitle("Borsa Hisseleri");
@@ -126,15 +113,16 @@ public class MainActivity extends AppCompatActivity implements ServiceViewInterf
         leftMenuList.setAdapter(new NavigationDrawerAdapter(this, navigationList));
         leftMenuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (adapterView.getItemAtPosition(i) instanceof NavSeperator) return;
-                selectNavigationItem(i);
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if (adapterView.getItemAtPosition(position) instanceof NavSeperator) return;
+                selectNavigationItem(position);
             }
         });
     }
 
-    private void selectNavigationItem(int i) {
-        callService(i);
+    private void selectNavigationItem(int position) {
+        selectedCategory = category.get(position);
+        callService(position);
         drawer.closeDrawer(GravityCompat.START);
     }
 
@@ -181,14 +169,28 @@ public class MainActivity extends AppCompatActivity implements ServiceViewInterf
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+
     @Override
     public void onSuccess(Object object) {
         if (object instanceof Market) {
             headerHolder.setData((Market) object);
         } else if (object instanceof ArrayList) {
-            objectList = (List<Object>) object;
-            mAdapter.setData((List<Object>) object);
+            replaceExchangeListFragment((List<Exchange>) object);
         }
+    }
+
+    private void replaceExchangeListFragment(List<Exchange> exchangeList) {
+        exchangeListFragment = GeneralExchangeListFragment.newInstance(selectedCategory, exchangeList);
+        replaceFragment(exchangeListFragment, false);
+    }
+
+    private void replaceFragment(Fragment fragment, boolean addToBackStack) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frmMainContainer, fragment);
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(null);
+        }
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -204,8 +206,7 @@ public class MainActivity extends AppCompatActivity implements ServiceViewInterf
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mAdapter.setData(filter(objectList, newText));
-//                mAdapter.setData(filteredModelList);
+
                 return true;
             }
         });
@@ -213,28 +214,7 @@ public class MainActivity extends AppCompatActivity implements ServiceViewInterf
         return true;
     }
 
-    private List<Object> filter(List<Object> models, String query) {
-        final String lowerCaseQuery = query.toLowerCase();
 
-        final List<Object> filteredModelList = new ArrayList<>();
-        if (models.get(0) instanceof Exchange)
-            for (Object model : models) {
-                Exchange exchange = (Exchange) model;
-                final String text = exchange.getName().toLowerCase();
-                if (text.contains(lowerCaseQuery)) {
-                    filteredModelList.add(model);
-                }
-            }
-        else if (models.get(0) instanceof MarketScreen)
-            for (Object model : models) {
-                MarketScreen marketScreen = (MarketScreen) model;
-                final String text = marketScreen.getName().toLowerCase();
-                if (text.contains(lowerCaseQuery)) {
-                    filteredModelList.add(model);
-                }
-            }
-        return filteredModelList;
-    }
 
     private void resolveDependency() {
         ((ThisApplication) getApplication())

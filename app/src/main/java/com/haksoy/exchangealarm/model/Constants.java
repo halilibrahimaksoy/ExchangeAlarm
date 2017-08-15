@@ -12,4 +12,6 @@ public class Constants {
     public static int MarketExchangeItemType = 1;
     public static String ExchangeType = "java.util.List<com.haksoy.exchangealarm.model.Exchange>";
     public static String MarketScreenType = "java.util.List<com.haksoy.exchangealarm.model.MarketScreen>";
+    public static String ExchangeCategory = "ExchangeCategory";
+    public static String ExchangeList = "ExchangeList";
 }
